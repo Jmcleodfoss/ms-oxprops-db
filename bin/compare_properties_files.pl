@@ -5,7 +5,7 @@
 use strict;
 
 my %properties;
-open(FH, "<", $ARGV[0]);
+open(FH, "<", $ARGV[0]) or die $!;
 while(<FH>) {
 	chomp;
 	my @row = split ",";
@@ -13,7 +13,7 @@ while(<FH>) {
 }
 close FH;
 
-open(FH, "<", $ARGV[1]);
+open(FH, "<", $ARGV[1]) or die $!;
 print "Properties in $ARGV[1] not in $ARGV[0]\n";
 while(<FH>) {
 	my ($tagname, $tag, $typecode, $datatyoe, $psetid, $pset)  = split ",";
