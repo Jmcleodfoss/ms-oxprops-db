@@ -23,6 +23,7 @@ my $save;
 while(<>) {
 	/^\d+ of \d+$/ and next;
 	/^$/ and next;
+	/Change Tracking/ and last;
 	chomp;
 
 	if (/^\s?(2\.\d+ )?(Pid(Lid|Name|Tag)[^\s]*)\s*$/) {
@@ -34,7 +35,6 @@ while(<>) {
 		if (length $name && $name ne $1) {
 			$savename = $1;
 			$save = $processing;
-print "$name $save $savename\n";
 		} else {
 			$name = $1;
 		}
