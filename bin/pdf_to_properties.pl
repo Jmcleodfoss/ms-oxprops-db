@@ -42,7 +42,7 @@ while(<>) {
 	}
 
 	/Property set: (PS[^ ]*) {([^}]*)}$/ and $psetid = $1 and $guid = $2;
-	/Property long ID \(LID\): (0x.*).*$/ and $id = $1;
+	/Property (long )?ID( \(LID\))?: (0x.*).*$/ and $id = $3;
 	/Data type: ([^,]*), (0x.*)$/ and $datatype = $1 and $typecode = $2;
 
 	if ($save eq "lid" || ($processing eq "lid" && length $name && length $id && length $psetid && length $guid && length $datatype && length $typecode)) {
