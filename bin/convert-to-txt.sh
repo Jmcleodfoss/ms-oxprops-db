@@ -33,7 +33,7 @@ pdftotext pdfs/"[MS-OXPROPS]-150914.pdf" text/v18.txt
 pdftotext pdfs/"[MS-OXPROPS]-160613.pdf" text/v19.txt
 pdftotext pdfs/"[MS-OXPROPS]-160914.pdf" text/v19b.txt
 pdftotext pdfs/"[MS-OXPROPS]-171013.pdf" text/v20.txt
-pdftotext pdfs/"[MS-OXPROPS]-171212.pdf" text/20b.txt
+pdftotext pdfs/"[MS-OXPROPS]-171212.pdf" text/v20b.txt
 pdftotext pdfs/"[MS-OXPROPS]-180724.pdf" text/v21.txt
 pdftotext pdfs/"[MS-OXPROPS]-181001.pdf" text/v22.txt
 pdftotext pdfs/"[MS-OXPROPS]-190319.pdf" text/v23.txt
