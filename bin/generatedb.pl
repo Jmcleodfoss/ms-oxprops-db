@@ -38,7 +38,7 @@ if ($help) {
 
 # Start processing
 skip_to('^\s*(Table of )?Contents');
-skip_to('^\s*Structures.*[1-9]');
+skip_to('^\s*(\d\s)?Structures.*[1-9]');
 
 my @id_list;
 while(<>){
