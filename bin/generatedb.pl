@@ -148,7 +148,11 @@ while (scalar @data){
 	}
 
 	if (exists $r->{'Property set'}){
-		$r->{'Property set'} =~ /(\w*)\s?\{([^\}]*)\}/ and push @output, (csv_escape($1), csv_escape($2));
+		if ($r->{'Property set'} =~ /(\w*)\s?\{([^\}]*)\}/) {
+			push @output, (csv_escape($1), csv_escape($2));
+		} else {
+			push @output, (csv_escape($r->{'Property set'}), '');
+		}
 	} else {
 		push @output, ('', '');
 	}
