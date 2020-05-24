@@ -141,7 +141,7 @@ while (scalar @data){
 		if ($r->{'Data Type'} =~ /(\S*),\s*(\S*)$/){
 			push @output, (csv_escape($1), csv_escape($2));
 		} else {
-			push @output, csv_escape(($r->{'Data Type'}), '');
+			push @output, (csv_escape($r->{'Data Type'}), '');
 		}
 	} else {
 		push @output, ('', '');
