@@ -140,7 +140,7 @@ while (scalar @data){
 	}
 
 	if (exists $r->{'Property set'}){
-		$r->{'Property set'} =~ /(\w*)\s\{([^\}]*)\}/ and push @output, $1 and push @output, $2;
+		$r->{'Property set'} =~ /(\w*)\s?\{([^\}]*)\}/ and push @output, $1 and push @output, $2;
 	} else {
 		push @output, ('', '');
 	}
