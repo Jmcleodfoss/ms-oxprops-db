@@ -20,6 +20,7 @@ GetOptions(
 	'help' => \(my $help),
 	'keys' => \(my $keys),
 	'ids' => \(my $ids),
+	'orphans' => \(my $orphans),
 	'version:s' => \(my $version = "")
 );
 
@@ -32,6 +33,7 @@ if ($help) {
 	print "	--keys: show all keys\n";
 	print "	--nodb: don't output the database\n";
 	print "	--noheader: suppress header in output\n";
+	print "	--orphans: show orphaned lines which might belong to an existing field";
 	print "	--version=V: use V as the version for this run";
 	exit;
 }
@@ -103,6 +105,8 @@ while(<>){
 		/^\d+ \/ \d+$/ and next;
 
 		$data[$i]->{$field} .= ' ' . $_ and next;
+
+		$orphans and printf "\, \$\n";
 	}
 }
 #print Dumper(@data);
