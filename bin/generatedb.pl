@@ -72,6 +72,10 @@ while(<>){
 
 	if (/^\s*([^:]*)\s?:\s+(.*$)$/){
 		my ($key, $value) = ($1, $2);
+
+		# part of footer
+		$key =~ /Release/ and next;
+
 		my $key_unique = $key;
 
 		$field = "";
@@ -112,7 +116,7 @@ if ($keys){
 $db or exit;
 
 if ($header) {
-	my @headings = ( 'Canonical Name', 'ID / LID', 'Data Type Name', 'Data Type Code', 'Property Set Name', 'Property Set GUID', 'Property Name', 'Alternate Name(s)', 'Area', 'Defining Reference(s)', 'Consuming Reference(s)', 'Release', 'WebDAV', 'Description');
+	my @headings = ( 'Canonical Name', 'ID / LID', 'Data Type Name', 'Data Type Code', 'Property Set Name', 'Property Set GUID', 'Property Name', 'Alternate Name(s)', 'Area', 'Defining Reference(s)', 'Consuming Reference(s)', 'WebDAV', 'Description');
 	$version ne "" and push @headings, 'Version';
 	print (join ',', @headings);
 	print "\n";
@@ -150,7 +154,6 @@ while (scalar @data){
 	push @output, exists $r->{'Area'} ? $r->{'Area'} : '';
 	push @output, exists $r->{'Defining Reference(s)'} ? '"' . $r->{'Defining Reference(s)'} .'"': '';
 	push @output, exists $r->{'Consuming Reference(s)'} ? '"' . $r->{'Consuming Reference(s)'} . '"': '';
-	push @output, exists $r->{'Release'} ? '"' . $r->{'Release'} . '"' : '';
 	push @output, exists $r->{'WebDAV'} ? $r->{'WebDAV'} : '';
 	push @output, exists $r->{'Description'} ? '"' . $r->{'Description'} . '"': '';
 	$version ne "" and push @output, $version;
