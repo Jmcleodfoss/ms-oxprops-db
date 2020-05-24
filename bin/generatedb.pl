@@ -112,9 +112,16 @@ while (scalar @data){
 #	exists $r->{'ID / LID'} or die 'No ID';
 	push @output, exists $r->{'ID / LID'} ? $r->{'ID / LID'} : '';
 
-	my @datatype = exists $r->{'Data type'} ? split ',', $r->{'Data type'}: ('', '');
-	push @output, $datatype[0];
-	push @output, $datatype[1];
+	if (exists $r->{'Data Type'}){
+		if ($r->{'Data Type'} =~ /(\S*),\s*(\S*)$/){
+			push @output, ($1, $2);
+		} else {
+			push @output, ($r->{'Data Type'}, '');
+		}
+	} else {
+		push @output, ('', '');
+	}
+
 
 	if (exists $r->{'Property set'}){
 		$r->{'Property set'} =~ /(\w*)\s\{([^\}]*)\}/ and push @output, $1 and push @output, $2;
