@@ -85,7 +85,6 @@ while(<>){
 		$key =~ /Property ID/ and $key_unique = 'ID / LID';
 		$key =~ /Proper?ty lo?ng ID ?\(LID\)/ and $key_unique = 'ID / LID';
 		$key =~ /Prope?r?t?y\ ?s?et/ and $key_unique = 'Property set';
-#		$key =~ /Proprty set/ and $key_unique = 'Property set';
 		$key =~ /References?/ and $key_unique = 'Reference(s)';
 		$data[$i]->{$key_unique} = $value;
 		$key_list{$key_unique} = 1;
