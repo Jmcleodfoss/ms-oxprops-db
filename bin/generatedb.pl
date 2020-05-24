@@ -16,7 +16,7 @@ use Data::Dumper;
 
 GetOptions(
 	'db!' => \(my $db = 1),
-	'header' => \(my $header=1),
+	'header!' => \(my $header = 1),
 	'help' => \(my $help),
 	'keys' => \(my $keys),
 	'ids' => \(my $ids),
@@ -95,10 +95,12 @@ if ($keys){
 }
 $db or exit;
 
-my @headings = ( 'Canonical Name', 'ID / LID', 'Data Type Name', 'Data Type Code', 'Property Set Name', 'Property Set GUID', 'Property Name', 'Alternate Name(s)', 'Area', 'Defining Reference(s)', 'Consuming Reference(s)', 'Release', 'WebDAV', 'Description');
-$version ne "" and push @headings, 'Version';
-print (join ',', @headings);
-print "\n";
+if ($header) {
+	my @headings = ( 'Canonical Name', 'ID / LID', 'Data Type Name', 'Data Type Code', 'Property Set Name', 'Property Set GUID', 'Property Name', 'Alternate Name(s)', 'Area', 'Defining Reference(s)', 'Consuming Reference(s)', 'Release', 'WebDAV', 'Description');
+	$version ne "" and push @headings, 'Version';
+	print (join ',', @headings);
+	print "\n";
+}
 
 $i = 0;
 while (scalar @data){
