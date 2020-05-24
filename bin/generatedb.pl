@@ -146,11 +146,11 @@ while (scalar @data){
 	}
 
 	push @output, exists $r->{'Property name'} ? $r->{'Property name'} : "";
-	push @output, exists $r->{'Alternate names'} ? $r->{'Alternate names'} : "";;
+	push @output, exists $r->{'Alternate Name(s)'} ? '"' . $r->{'Alternate Name(s)'} . '"': "";
 	push @output, exists $r->{'Area'} ? $r->{'Area'} : '';
-	push @output, exists $r->{'Defining Reference(s)'} ? $r->{'Defining Reference(s)'} : '';
-	push @output, exists $r->{'Consuming Reference(s)'} ? $r->{'Consuming Reference(s)'} : '';
-	push @output, exists $r->{'Release'} ? $r->{'Release'} : '';
+	push @output, exists $r->{'Defining Reference(s)'} ? '"' . $r->{'Defining Reference(s)'} .'"': '';
+	push @output, exists $r->{'Consuming Reference(s)'} ? '"' . $r->{'Consuming Reference(s)'} . '"': '';
+	push @output, exists $r->{'Release'} ? '"' . $r->{'Release'} . '"' : '';
 	push @output, exists $r->{'WebDAV'} ? $r->{'WebDAV'} : '';
 	push @output, exists $r->{'Description'} ? $r->{'Description'} : '';
 	$version ne "" and push @output, $version;
