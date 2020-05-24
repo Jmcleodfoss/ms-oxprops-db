@@ -111,7 +111,6 @@ while (scalar @data){
 	exists $r->{'Canonical Name'} or die 'No Canonical Name';
 	push @output, $r->{'Canonical Name'};
 
-#	exists $r->{'ID / LID'} or die 'No ID';
 	push @output, exists $r->{'ID / LID'} ? $r->{'ID / LID'} : '';
 
 	if (exists $r->{'Data Type'}){
