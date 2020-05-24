@@ -152,7 +152,7 @@ while (scalar @data){
 	push @output, exists $r->{'Consuming Reference(s)'} ? '"' . $r->{'Consuming Reference(s)'} . '"': '';
 	push @output, exists $r->{'Release'} ? '"' . $r->{'Release'} . '"' : '';
 	push @output, exists $r->{'WebDAV'} ? $r->{'WebDAV'} : '';
-	push @output, exists $r->{'Description'} ? $r->{'Description'} : '';
+	push @output, exists $r->{'Description'} ? '"' . $r->{'Description'} . '"': '';
 	$version ne "" and push @output, $version;
 
 	print (join ',', @output);
