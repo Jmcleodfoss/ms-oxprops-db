@@ -126,9 +126,7 @@ if ($header) {
 	print "\n";
 }
 
-$i = 0;
 while (scalar @data){
-#printf "%d (%d remaining) id %s found %s\n", $i, scalar @data, $id_list[$i], Dumper($data[$i]); ++$i;
 	my $r =  shift @data;
 
 	my @output;
