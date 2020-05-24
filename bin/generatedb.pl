@@ -145,7 +145,7 @@ while (scalar @data){
 		push @output, ('', '');
 	}
 
-	push @output, exists $r->{'Property Name'} ? $r->{'Property name'} : "";
+	push @output, exists $r->{'Property name'} ? $r->{'Property name'} : "";
 	push @output, exists $r->{'Alternate names'} ? $r->{'Alternate names'} : "";;
 	push @output, exists $r->{'Area'} ? $r->{'Area'} : '';
 	push @output, exists $r->{'Defining Reference(s)'} ? $r->{'Defining Reference(s)'} : '';
