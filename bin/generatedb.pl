@@ -129,33 +129,33 @@ while (scalar @data){
 
 	my @output;
 	exists $r->{'Canonical Name'} or die 'No Canonical Name';
-	push @output, $r->{'Canonical Name'};
+	push @output, csv_escape($r->{'Canonical Name'});
 
 	push @output, exists $r->{'ID / LID'} ? $r->{'ID / LID'} : '';
 
 	if (exists $r->{'Data Type'}){
 		if ($r->{'Data Type'} =~ /(\S*),\s*(\S*)$/){
-			push @output, ($1, $2);
+			push @output, (csv_escape($1), csv_escape($2));
 		} else {
-			push @output, ($r->{'Data Type'}, '');
+			push @output, csv_escape(($r->{'Data Type'}), '');
 		}
 	} else {
 		push @output, ('', '');
 	}
 
 	if (exists $r->{'Property set'}){
-		$r->{'Property set'} =~ /(\w*)\s?\{([^\}]*)\}/ and push @output, $1 and push @output, $2;
+		$r->{'Property set'} =~ /(\w*)\s?\{([^\}]*)\}/ and push @output, (csv_escape($1), csv_escape($2));
 	} else {
 		push @output, ('', '');
 	}
 
-	push @output, exists $r->{'Property name'} ? $r->{'Property name'} : "";
-	push @output, exists $r->{'Alternate Name(s)'} ? '"' . $r->{'Alternate Name(s)'} . '"': "";
-	push @output, exists $r->{'Area'} ? '"' . $r->{'Area'} . '"': '';
-	push @output, exists $r->{'Defining Reference(s)'} ? '"' . $r->{'Defining Reference(s)'} .'"': '';
-	push @output, exists $r->{'Consuming Reference(s)'} ? '"' . $r->{'Consuming Reference(s)'} . '"': '';
-	push @output, exists $r->{'WebDAV'} ? '"' . $r->{'WebDAV'} . '"': '';
-	push @output, exists $r->{'Description'} ? '"' . $r->{'Description'} . '"': '';
+	push @output, exists $r->{'Property name'}		? csv_escape($r->{'Property name'}): "";
+	push @output, exists $r->{'Alternate Name(s)'}		? csv_escape($r->{'Alternate Name(s)'}): "";
+	push @output, exists $r->{'Area'}			? csv_escape($r->{'Area'}) : '';
+	push @output, exists $r->{'Defining Reference(s)'}	? csv_escape($r->{'Defining Reference(s)'}) : '';
+	push @output, exists $r->{'Consuming Reference(s)'}	? csv_escape($r->{'Consuming Reference(s)'}) : '';
+	push @output, exists $r->{'WebDAV'}			? csv_escape($r->{'WebDAV'}) : '';
+	push @output, exists $r->{'Description'}		? csv_escape($r->{'Description'}) : '';
 	$version ne "" and push @output, $version;
 
 	print (join ',', @output);
@@ -169,3 +169,8 @@ sub skip_to {
 	}
 }
 
+sub csv_escape {
+	my $old = shift @_;
+	$old =~ s/"/""/g;
+	return ('"' . $old . '"');
+}
