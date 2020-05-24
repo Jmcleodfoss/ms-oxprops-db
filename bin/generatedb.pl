@@ -55,6 +55,9 @@ my %key_list;
 # The entire database
 my @data;
 
+# To read in multi-line descriptions etc
+my $field = "";
+
 # Index into the @id_list read from the table of contents;
 my $i = 0;
 while(<>){
@@ -70,12 +73,15 @@ while(<>){
 	if (/^\s*([^:]*)\s?:\s+(.*$)$/){
 		my ($key, $value) = ($1, $2);
 		my $key_unique = $key;
-		$key =~ /^Alternate\ [Nn]ames?\s*/ and $key_unique = 'Alternate Name(s)';
+
+		$field = "";
+
+		$key =~ /^Alternate\ [Nn]ames?\s*/ and $key_unique = 'Alternate Name(s)' and $field = $key_unique;
 		$key =~ /^Canonical\ [Nn]ame\s*/ and $key_unique = 'Canonical Name';
-		$key =~ /^Consuming\ [Rr]eferences?\s*/ and $key_unique = 'Consuming Reference(s)';
+		$key =~ /^Consuming\ [Rr]eferences?\s*/ and $key_unique = 'Consuming Reference(s)' and $field = $key_unique;
 		$key =~ /Da?ta [Tt]yp?e/ and $key_unique = 'Data Type';
 		$key =~ /^Defining\ [Rr]eferences?\s*/ and $key_unique = 'Defining Reference(s)';
-		$key =~ /^Descripton\s*/ and $key_unique = 'Description';
+		$key =~ /^Descripti?on\s*/ and $key_unique = 'Description' and $field = $key_unique;
 		$key =~ /Property ID/ and $key_unique = 'ID / LID';
 		$key =~ /Proper?ty lo?ng ID ?\(LID\)/ and $key_unique = 'ID / LID';
 		$key =~ /Prope?r?t?y\ ?s?et/ and $key_unique = 'Property set';
@@ -83,6 +89,16 @@ while(<>){
 		$key =~ /References?/ and $key_unique = 'Reference(s)';
 		$data[$i]->{$key_unique} = $value;
 		$key_list{$key_unique} = 1;
+	} elsif ($field ne ""){
+		/^\s?2\.\d+/ and next;
+		/^Pid/ and next;
+		/^^\s*$/ and next;
+		/^\[MS-OXPROPS/ and next;
+		/^Exchange Server Protocols Master Property List/ and next;
+		/^Copyright/ and next;
+		/^\d+ \/ \d+$/ and next;
+
+		$data[$i]->{$field} .= ' ' . $_ and next;
 	}
 }
 #print Dumper(@data);
