@@ -1,4 +1,5 @@
 #!/bin/bash
+# Download all known versions of MS-OXPROPS as PDFs.
 
 if [ ! -d pdfs ]; then
 	mkdir pdfs || { echo "Could not create pdfs dir"; exit 1; }
@@ -6,6 +7,11 @@ fi
 
 pushd pdfs
 
+# Latest version is stored without a suffix for the version.
+wget https://interoperability.blob.core.windows.net/files/MS-OXPROPS/%5bMS-OXPROPS%5d.pdf
+mv '[MS-OXPROPS].pdf' '[MS-OXPROPS]-190618.pdf'
+
+## Remaining versions all have suffixes which map to releases as shown in https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxprops/f6ab1613-aefe-447d-a49c-18217230b148
 wget https://interoperability.blob.core.windows.net/files/MS-OXPROPS/%5bMS-OXPROPS%5d-190319.pdf
 wget https://interoperability.blob.core.windows.net/files/MS-OXPROPS/%5bMS-OXPROPS%5d-181001.pdf
 wget https://interoperability.blob.core.windows.net/files/MS-OXPROPS/%5bMS-OXPROPS%5d-180724.pdf
