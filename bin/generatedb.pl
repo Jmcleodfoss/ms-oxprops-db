@@ -93,6 +93,10 @@ while(<>){
 		$key =~ /Prope?r?t?y\ ?s?et/ and $key_unique = 'Property set';
 		$key =~ /References?/ and $key_unique = 'Reference(s)';
 		$key =~ /WebDAV/ and $field = 'WebDAV';
+
+		$value =~ s/"""//g;
+		$value =~ s/"ÿ""//g;
+
 		$data[$i]->{$key_unique} = $value;
 		$key_list{$key_unique} = 1;
 	} elsif ($field ne ""){
