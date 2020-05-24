@@ -141,7 +141,16 @@ while (scalar @data){
 
 	if (exists $r->{'Data Type'}){
 		if ($r->{'Data Type'} =~ /(\S*),\s*(\S*)$/){
-			push @output, (csv_escape($1), csv_escape($2));
+			my $typename = $1;
+			my $typecode = $2;
+			$typename =~ s/^P?typBinary/PtypBinary/;
+			$typename =~ s/^P?ty?pBoolean/PtypBoolean/;
+			$typename =~ s/^P?ty?pInteger32/PtypInteger32/;
+			$typename =~ s/^P?typMultipleInteger32/PtypMultipleInteger32/;
+			$typename =~ s/^P?ty?p?e?Sd?tring/PtypString/;
+			$typename =~ s/Pty?pTime/PtypTime/;
+			$typename =~ s/0x001EPtypEmbeddedTable/PtypEmbeddedTable/;
+			push @output, (csv_escape($typename), csv_escape($typecode));
 		} else {
 			push @output, (csv_escape($r->{'Data Type'}), '');
 		}
