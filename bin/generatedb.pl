@@ -164,7 +164,7 @@ while (scalar @data){
 	push @output, exists $r->{'Consuming Reference(s)'}	? csv_escape($r->{'Consuming Reference(s)'}) : '';
 	push @output, exists $r->{'WebDAV'}			? csv_escape($r->{'WebDAV'}) : '';
 	push @output, exists $r->{'Description'}		? csv_escape($r->{'Description'}) : '';
-	$version ne "" and push @output, $version;
+	$version ne "" and push @output, "'" . $version;
 
 	print (join ',', @output);
 	print "\n";
