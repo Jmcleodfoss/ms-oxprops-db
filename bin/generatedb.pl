@@ -2,17 +2,6 @@
 use strict;
 use warnings;
 use Getopt::Long;
-use Data::Dumper;
-
-# Command-line arguments
-# Show all keys found if true;
-#my $keys = '';
-
-# List bare IDs if true;
-#my $ids = '';
-
-# Emit database if true (default);
-#my $db = '';
 
 GetOptions(
 	'db!' => \(my $db = 1),
@@ -113,7 +102,6 @@ while(<>){
 		$orphans and printf "\, \$\n";
 	}
 }
-#print Dumper(@data);
 
 if ($keys){
 	print "\nKeys";
