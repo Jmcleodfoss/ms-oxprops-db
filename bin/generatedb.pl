@@ -54,7 +54,7 @@ my $i = 0;
 while(<>){
 	chomp;
 	/^\s*Security\s*$/ || /^\s*(\d+\s+)?Structure Examples\s*$/ and last;
-	$i > scalar @id_list and printf "bailing %d >= %d too high\n", $i, scalar @id_list and last;
+	$i > scalar @id_list and printf "bailing i = %d >= max number expected %d\n", $i, scalar @id_list and last;
 
 	if ($i+1 < scalar @id_list && $_ =~ /^\s*(2\.\d+\s+)?$id_list[$i+1]\s*$/){
  		! exists $data[$i]->{'Canonical Name'} and $data[$i]->{'Canonical Name'} = $id_list[$i];
