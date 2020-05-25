@@ -4,6 +4,7 @@ use warnings;
 use Getopt::Long;
 
 GetOptions(
+	'fixtypos!' => \(my $fix_typos = 1),
 	'db!' => \(my $show_db = 1),
 	'header!' => \(my $show_header = 1),
 	'help' => \(my $help),
@@ -21,6 +22,7 @@ if ($help) {
 	print "	--ids: show all property LIDs, names, and tags\n";
 	print "	--keys: show all keys\n";
 	print "	--nodb: don't output the database\n";
+	print "	--nofixtypos: don't correct recognizeable typos in property type and property set names\n";
 	print "	--noheader: suppress header in output\n";
 	print "	--orphans: show orphaned lines which might belong to an existing field";
 	print "	--version=V: use V as the version for this run";
@@ -138,13 +140,15 @@ while (scalar @data){
 	if (exists $r->{'Data Type'}){
 		if ($r->{'Data Type'} =~ /(\S*),\s*(\S*)$/){
 			my ($typename, $typecode) = ($1, $2);
-			$typename =~ s/^P?typBinary/PtypBinary/;
-			$typename =~ s/^P?ty?pBoolean/PtypBoolean/;
-			$typename =~ s/^P?ty?pInteger32/PtypInteger32/;
-			$typename =~ s/^P?typMultipleInteger32/PtypMultipleInteger32/;
-			$typename =~ s/^P?ty?p?e?Sd?tring/PtypString/;
-			$typename =~ s/Pty?pTime/PtypTime/;
-			$typename =~ s/0x001EPtypEmbeddedTable/PtypEmbeddedTable/;
+			if ($fix_typos){
+				$typename =~ s/^P?typBinary/PtypBinary/;
+				$typename =~ s/^P?ty?pBoolean/PtypBoolean/;
+				$typename =~ s/^P?ty?pInteger32/PtypInteger32/;
+				$typename =~ s/^P?typMultipleInteger32/PtypMultipleInteger32/;
+				$typename =~ s/^P?ty?p?e?Sd?tring/PtypString/;
+				$typename =~ s/Pty?pTime/PtypTime/;
+				$typename =~ s/0x001EPtypEmbeddedTable/PtypEmbeddedTable/;
+			}
 			push @output, (csv_escape($typename), csv_escape($typecode));
 		} else {
 			push @output, (csv_escape($r->{'Data Type'}), '');
@@ -156,15 +160,17 @@ while (scalar @data){
 	if (exists $r->{'Property set'}){
 		if ($r->{'Property set'} =~ /(\w*)\s?\{([^\}]*)\}?/) {
 			my ($ps, $guid) = ($1, $2);
-			$ps =~ s/P?SE?T?I?D/PSETID/;
-			$ps =~ s/Addrss/Address/;
-			$ps =~ s/Appintment/Appointment/;
-			$ps =~ s/Asistant/Assistant/;
-			$ps =~ s/Meting/Meeting/;
-			$ps =~ s/Shring/Sharing/;
+			if ($fix_typos){
+				$ps =~ s/P?SE?T?I?D/PSETID/;
+				$ps =~ s/Addrss/Address/;
+				$ps =~ s/Appintment/Appointment/;
+				$ps =~ s/Asistant/Assistant/;
+				$ps =~ s/Meting/Meeting/;
+				$ps =~ s/Shring/Sharing/;
+			}
 			push @output, (csv_escape($ps), csv_escape($guid));
 		} else {
-			$r->{'Property set'} =~ s/PSETIC/PSETID/;
+			$fix_typos and $r->{'Property set'} =~ s/PSETIC/PSETID/;
 			push @output, (csv_escape($r->{'Property set'}), '');
 		}
 	} else {
