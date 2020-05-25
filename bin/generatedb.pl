@@ -24,8 +24,8 @@ if ($help) {
 	print "	--nodb: don't output the database\n";
 	print "	--nofixtypos: don't correct recognizeable typos in property type and property set names\n";
 	print "	--noheader: suppress header in output\n";
-	print "	--orphans: show orphaned lines which might belong to an existing field";
-	print "	--version=V: use V as the version for this run";
+	print "	--orphans: show orphaned lines which might belong to an existing field\n";
+	print "	--version=V: use V as the version for this run\n";
 	exit;
 }
 
