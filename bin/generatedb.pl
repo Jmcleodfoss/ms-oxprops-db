@@ -155,9 +155,17 @@ while (scalar @data){
 	}
 
 	if (exists $r->{'Property set'}){
-		if ($r->{'Property set'} =~ /(\w*)\s?\{([^\}]*)\}/) {
-			push @output, (csv_escape($1), csv_escape($2));
+		if ($r->{'Property set'} =~ /(\w*)\s?\{([^\}]*)\}?/) {
+			my ($ps, $guid) = ($1, $2);
+			$ps =~ s/P?SE?T?I?D/PSETID/;
+			$ps =~ s/Addrss/Address/;
+			$ps =~ s/Appintment/Appointment/;
+			$ps =~ s/Asistant/Assistant/;
+			$ps =~ s/Meting/Meeting/;
+			$ps =~ s/Shring/Sharing/;
+			push @output, (csv_escape($ps), csv_escape($guid));
 		} else {
+			$r->{'Property set'} =~ s/PSETIC/PSETID/;
 			push @output, (csv_escape($r->{'Property set'}), '');
 		}
 	} else {
