@@ -58,6 +58,7 @@ while(<>){
 
 	if ($i+1 < scalar @id_list && $_ =~ /^\s*(2\.\d+\s+)?$id_list[$i+1]\s*$/){
  		! exists $data[$i]->{'Canonical Name'} and $data[$i]->{'Canonical Name'} = $id_list[$i];
+		$field = "";
 		++$i;
 	}
 
@@ -94,8 +95,10 @@ while(<>){
 		/^^\s*$/ and next;
 		/^\[MS-OXPROPS/ and next;
 		/^Exchange Server Protocols Master Property List/ and next;
+		/^Office Exchange Protocols Master Property List Specification/ and next;
 		/^Copyright/ and next;
 		/^\d+ \/ \d+$/ and next;
+		/^\d+ of \d+$/ and next;
 
 		$data[$i]->{$field} .= ' ' . $_ and next;
 
