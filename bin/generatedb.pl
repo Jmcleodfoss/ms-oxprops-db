@@ -87,6 +87,11 @@ while(<>){
 		$value =~ s/"""//g;
 		$value =~ s/"ÿ""//g;
 
+		# Handle a formatting problems in very early versions of the document: the first Pid section title on a page is followed immediately by
+		# the second Pid section title, followed by the data for the first Pid Listed and then the data for the second.
+		$key_unique eq 'Canonical Name' && $id_list[$i] ne $value && $id_list[$i-1] eq $value and --$i;
+		$key_unique eq 'Canonical Name' && $id_list[$i] ne $value && $id_list[$i+1] eq $value and ++$i;
+
 		$data[$i]->{$key_unique} = $value;
 		$key_list{$key_unique} = 1;
 	} elsif ($field ne ""){
