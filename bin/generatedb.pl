@@ -4,12 +4,12 @@ use warnings;
 use Getopt::Long;
 
 GetOptions(
-	'db!' => \(my $db = 1),
-	'header!' => \(my $header = 1),
+	'db!' => \(my $show_db = 1),
+	'header!' => \(my $show_header = 1),
 	'help' => \(my $help),
-	'keys' => \(my $keys),
-	'ids' => \(my $ids),
-	'orphans' => \(my $orphans),
+	'keys' => \(my $show_keys),
+	'ids' => \(my $show_ids),
+	'orphans' => \(my $show_orphans),
 	'version:s' => \(my $version = "")
 );
 
@@ -36,7 +36,7 @@ while(<>){
 	/^\s*(\d\s*)?Structure Examples/ and last;
 	/^\s*(2\.\d+\s+)?(Pid\w*)\W.*$/ and push @id_list, $2;
 }
-$ids and print "$_\n" foreach(@id_list);
+$show_ids and print "$_\n" foreach(@id_list);
 
 skip_to('^\s?(\d\s)?Structures\s*$');
 
@@ -107,19 +107,19 @@ while(<>){
 
 		$data[$i]->{$field} .= ' ' . $_ and next;
 
-		$orphans and printf "\, \$\n";
+		$show_orphans and printf "\, \$\n";
 	}
 }
 
-if ($keys){
+if ($show_keys){
 	print "\nKeys";
 	$version ne "" and print " ($version)";
 	print "\n----\n";
 	print "$_\n" foreach(sort keys %key_list);
 }
-$db or exit;
+$show_db or exit;
 
-if ($header) {
+if ($show_header) {
 	my @headings = ( 'Canonical Name', 'ID / LID', 'Data Type Name', 'Data Type Code', 'Property Set Name', 'Property Set GUID', 'Property Name', 'Alternate Name(s)', 'Area', 'Defining Reference(s)', 'Consuming Reference(s)', 'WebDAV', 'Description');
 	$version ne "" and push @headings, 'Version';
 	print (join ',', @headings);
