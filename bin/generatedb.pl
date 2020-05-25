@@ -16,7 +16,7 @@ GetOptions(
 
 if ($help) {
 	print "use\n";
-	print "	$0 [--help] | --version=V [--ids] [--keys] [--nodb]\n";
+	print "	$0 [--help] | --version=V [--ids] [--keys] [--nodb] [--nofixtypos] [--noheader] [--orphans] [--version=V]\n";
 	print "where:\n";
 	print "	--help: show this help and exit\n";
 	print "	--ids: show all property LIDs, names, and tags\n";
