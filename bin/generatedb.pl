@@ -137,8 +137,7 @@ while (scalar @data){
 
 	if (exists $r->{'Data Type'}){
 		if ($r->{'Data Type'} =~ /(\S*),\s*(\S*)$/){
-			my $typename = $1;
-			my $typecode = $2;
+			my ($typename, $typecode) = ($1, $2);
 			$typename =~ s/^P?typBinary/PtypBinary/;
 			$typename =~ s/^P?ty?pBoolean/PtypBoolean/;
 			$typename =~ s/^P?ty?pInteger32/PtypInteger32/;
