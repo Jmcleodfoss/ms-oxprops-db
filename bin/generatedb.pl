@@ -187,7 +187,6 @@ while (scalar @data){
 	$version ne "" and push @output, csv_escape($version);
 	print (join ',', @output);
 	print "\n";
-exit;
 }
 
 sub skip_to {
