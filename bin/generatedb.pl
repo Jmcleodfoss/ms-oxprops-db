@@ -6,6 +6,7 @@ use Getopt::Long;
 GetOptions(
 	'fixtypos!' => \(my $fix_typos = 1),
 	'db!' => \(my $show_db = 1),
+	'delim:s' => \(my $delim=','),
 	'header!' => \(my $show_header = 1),
 	'help' => \(my $help),
 	'keys' => \(my $show_keys),
@@ -19,6 +20,7 @@ if ($help) {
 	print "	$0 [--help] | --version=V [--ids] [--keys] [--nodb] [--nofixtypos] [--noheader] [--orphans] [--version=V]\n";
 	print "where:\n";
 	print "	--help: show this help and exit\n";
+	print "	--delim=D: use 'D' as delimiter between fields (default = ',')\n";
 	print "	--ids: show all property LIDs, names, and tags\n";
 	print "	--keys: show all keys\n";
 	print "	--nodb: don't output the database\n";
@@ -124,7 +126,7 @@ $show_db or exit;
 if ($show_header) {
 	my @headings = ( 'Canonical Name', 'ID / LID', 'Data Type Name', 'Data Type Code', 'Property Set Name', 'Property Set GUID', 'Property Name', 'Alternate Name(s)', 'Area', 'Defining Reference(s)', 'Consuming Reference(s)', 'WebDAV', 'Description');
 	$version ne "" and push @headings, 'Version';
-	print (join ',', @headings);
+	print (join $delim, @headings);
 	print "\n";
 }
 
@@ -185,7 +187,7 @@ while (scalar @data){
 	push @output, exists $r->{'WebDAV'}			? csv_escape($r->{'WebDAV'}) : '';
 	push @output, exists $r->{'Description'}		? csv_escape($r->{'Description'}) : '';
 	$version ne "" and push @output, csv_escape($version);
-	print (join ',', @output);
+	print (join $delim, @output);
 	print "\n";
 }
 
