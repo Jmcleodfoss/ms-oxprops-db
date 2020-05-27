@@ -2,7 +2,7 @@
 CSV Database of Exchange properties pulled from various versions of Microsoft's MS-OXPROPS document. This uses the Excel dialect of CSV; other formats may be provided on request.
 
 ## Prerequisites
-The scripts use bash, perl, and pdftotext from the poppler suite of PDF tools.
+The scripts use bash, Perl, and pdftotext from the poppler suite of PDF tools.
 
 ## Procedure
 This downloads all known MS-OXPROPS pdfs, converts them to text, and then extracts the database info from all text files.
@@ -55,4 +55,4 @@ Artifacts are stored on Dropbox. There is no guarantee that older versions of th
 | [ms-oxprops-2020-05-25.csv.zip](https://www.dropbox.com/s/yynqininhauff18/ms-oxprops-2020-05-25.csv.zip?dl=0) | 02ea3276c511b64ff68d786a39bd0e0858a8c04be5b774ae79128b265109c05a *ms-oxprops-2020-05-25.csv.zip |
 | [ms-oxprops-2020-05-25.xlsx](https://www.dropbox.com/s/vqivoeba6j4ih9b/ms-oxprops-2020-05-25.xlsx?dl=0) | 3bf09572ac6d3eee84ecf81327afbb94608243698fa83946113d2fd90d531d19 *ms-oxprops-2020-05-25.xlsx |
 
-The Excel version has a filtet and fixed top row and first column
+The Excel version has a filter and fixed top row and first column
