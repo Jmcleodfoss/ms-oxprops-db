@@ -14,9 +14,10 @@ generatedb-all.sh calls generatadb.pl for each text file.
 
 ## Command line arguments to generatedb.pl
 Run as
-	cat ms-oxprops-text-version-of-pdf | bin/generatedb.pl [--help] [--ids] [--keys] [--nodb] [--nofixtypos] [--noheader] [--orphans] [--version=V]
+	cat ms-oxprops-text-version-of-pdf | bin/generatedb.pl [--help] [--ids] [--keys] [--nodb] [--nofixtypos] [--noheader] [--orphans] [--version=V] [--delim=D]
 where
 
+* --delim=D: use D (can be multiple characters) as the delimiter instead of '.'.
 * --help: shows info about the command-line options
 * --ids: List all the property long IDs, tags, and names found in the table of contents
 * --keys: List all keys found (useful during development and to check spelling in new versions of the document. See example below;
