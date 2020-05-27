@@ -32,6 +32,17 @@ To check whether there are any typos in the keys in new versions of the document
 cat ms-oxprops.txt | bin/generatedb.pl --keys --nodb | sort -u
 ```
 
+### The --ids option
+To generate a list of IDs only, use the --ids option:
+```
+cat ms-oxprops.txt | bin/generatedb.pl --ids --nodb
+```
+
+To get just the LIDs but not the tags or names:
+```
+cat ms-oxprops.txt | bin/generatedb.pl --ids --nodb |grep PidLid
+```
+
 ## Motivation
 I have been working with Microsoft PST and MSG files (as a hobbyist) for almost a decade, and this document is something I wish I had had from the start. Maybe others will find it useful.
 
