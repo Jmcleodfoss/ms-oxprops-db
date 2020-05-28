@@ -14,7 +14,9 @@ generatedb-all.sh calls generatadb.pl for each text file.
 
 ## Command line arguments to generatedb.pl
 Run as
+```
 	cat ms-oxprops-text-version-of-pdf | bin/generatedb.pl [--help] [--ids] [--keys] [--nodb] [--nofixtypos] [--noheader] [--orphans] [--version=V] [--delim=D]
+```
 where
 
 * --delim=D: use D (can be multiple characters) as the delimiter instead of '.'.
